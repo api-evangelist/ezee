@@ -1,0 +1,57 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: eZee Technosys
+providerId: ezee
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Hospitality
+- Hotel
+- PMS
+- Channel Manager
+- Reservations
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The eZee Technosys (Yanolja Cloud Solution) YCS Connectivity Portal API is a
+  partner-gated integration interface scoped per property by HotelCode and
+  AuthCode. eZee does not publish specific public rate-limit, quota, or
+  throttling values for the connectivity endpoints. Connectivity partners are
+  generally expected to poll booking and inventory updates at reasonable
+  intervals rather than on a high-frequency basis, and to follow the
+  Connectivity Portal's integration guidelines. No numeric limits are
+  reconciled in this artifact.
+notes: >-
+  Specific request-per-minute / per-day limits are not publicly documented and
+  are governed by partner agreements and the Connectivity Portal guidelines.
+  Confirm polling intervals and throttling behavior with eZee / Yanolja Cloud
+  Solution during integration.
+sources:
+- https://api.ezeetechnosys.com/
+- https://api.ezeetechnosys.com/tag/pms-connectivity/
+responseCodes:
+  throttled: see provider documentation
+limits:
+- name: Connectivity Requests
+  scope: property
+  metric: requests
+  limit: see provider documentation
+  notes: Per-property limits scoped by HotelCode; not publicly documented.
+- name: Booking / Inventory Polling
+  scope: property
+  metric: requests
+  limit: see provider documentation
+  notes: Partners poll update endpoints at reasonable intervals per portal guidelines.
+policies:
+- name: Partner-Gated Access
+  description: API access is provisioned per property to approved connectivity partners; limits are governed by partner agreement.
+- name: Reasonable Polling
+  description: Clients should poll booking and inventory update endpoints at sensible intervals rather than continuously.
+- name: Backoff Strategy
+  description: Clients should implement retries with backoff and honor any throttling signals returned by the service.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

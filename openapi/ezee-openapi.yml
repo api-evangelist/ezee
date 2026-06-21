@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  title: eZee Technosys YCS Connectivity API
+  description: >-
+    Partner-facing connectivity API for the eZee Technosys (Yanolja Cloud
+    Solution) hospitality platform - eZee Absolute PMS, eZee Centrix channel
+    manager, eZee Reservation booking engine, and eZee Optimus POS. The API is
+    not a self-serve public API; access is provisioned per property through the
+    YCS Connectivity Portal (https://api.ezeetechnosys.com/). Every request is
+    scoped to a property via a HotelCode plus an AuthCode (authentication
+    token), supplied together with a vendor-identifying User-Agent header. The
+    PMS connectivity surface accepts JSON POST requests to pms_connectivity.php,
+    while inventory and rate reads use XML POST to getdataAPI.php. Endpoint
+    paths and field names below are modeled from the public Connectivity Portal
+    documentation and are subject to per-property provisioning; verify exact
+    request and response payloads against the portal before integrating.
+  termsOfService: https://www.ezeetechnosys.com
+  contact:
+    name: eZee Technosys / Yanolja Cloud Solution
+    url: https://api.ezeetechnosys.com/
+  version: '1.0'
+servers:
+  - url: https://live.ipms247.com
+    description: eZee / Yanolja Cloud Solution production connectivity host
+paths:
+  /pmsinterface/pms_connectivity.php:
+    post:
+      operationId: pmsConnectivity
+      tags:
+        - PMS Connectivity
+      summary: PMS connectivity operations (bookings, inventory, rates, restrictions, configuration)
+      description: >-
+        Single JSON POST endpoint that multiplexes PMS connectivity operations
+        via a RequestType field. Documented operations include: retrieving a
+        booking, retrieving all bookings (new / modified / cancelled updates),
+        retrieving transaction details, receiving a booking, updating room
+        inventory, updating linear and non-linear rates, updating stay
+        restrictions (StopSell, Close-on-Arrival, Close-on-Departure, Min
+        Nights, Max Nights), retrieving room rates with source details, and
+        retrieving room information (room types, rate types, rate plans). All
+        requests are scoped by HotelCode and AuthCode.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RequestType
+                - Authentication
+              properties:
+                RequestType:
+                  type: string
+                  description: >-
+                    Operation selector, e.g. FetchBooking, FetchBookings,
+                    BookingRecieve, UpdateRoomInventory, SetRoomRate,
+                    UpdateMinStay, UpdateStopSell, FetchRoomInformation.
+                Authentication:
+                  type: object
+                  required:
+                    - HotelCode
+                    - AuthCode
+                  properties:
+                    HotelCode:
+                      type: string
+                      description: Unique property identifier issued by eZee / Yanolja Cloud Solution.
+                    AuthCode:
+                      type: string
+                      description: Property-scoped authentication token (API key).
+      responses:
+        '200':
+          description: JSON response payload whose shape depends on RequestType.
+          content:
+            application/json:
+              schema:
+                type: object
+  /pmsinterface/getdataAPI.php:
+    post:
+      operationId: getData
+      tags:
+        - Inventory and Rates
+      summary: Retrieve room inventory and room rates (XML)
+      description: >-
+        XML POST endpoint used to read room inventory and room rates for a date
+        range, room type, and rate type. Scoped by HotelCode and AuthCode.
+        Responds with XML.
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: string
+              description: XML request document containing HotelCode, AuthCode, date range, room type, and rate type.
+      responses:
+        '200':
+          description: XML document containing the requested inventory or rate data.
+          content:
+            application/xml:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    HotelCodeAuthCode:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        Property-scoped credentials (HotelCode + AuthCode) provisioned through
+        the YCS Connectivity Portal, supplied per the portal's authentication
+        conventions (commonly carried in the request body and/or as HTTP Basic
+        with a vendor-identifying User-Agent header). Not a self-serve public
+        API key.
+security:
+  - HotelCodeAuthCode: []

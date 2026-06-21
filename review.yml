@@ -1,0 +1,98 @@
+aid: ezee
+name: eZee Technosys
+review:
+  question: Does eZee Technosys expose a documented, publicly accessible API?
+  answer: partial
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No documented WebSocket or SSE event stream surface exists for the eZee
+    connectivity API, so no AsyncAPI document was authored. The connectivity
+    API is a request/response HTTP interface (JSON and XML over POST). Booking
+    and inventory changes are obtained by polling update endpoints rather than
+    via a push/streaming transport.
+findings:
+  summary: |
+    eZee Technosys exposes a real, documented connectivity API through its YCS
+    Connectivity Portal (https://api.ezeetechnosys.com/), but it is NOT a
+    self-serve public API. Access is partner-gated and provisioned per
+    property: every request is scoped by a HotelCode plus an AuthCode
+    (authentication token) issued by eZee / Yanolja Cloud Solution, and a
+    vendor-identifying User-Agent header is expected. The surface covers PMS
+    connectivity (bookings, room inventory, rates, stay restrictions,
+    configuration masters), a channel-manager XML interface for connecting a
+    third-party PMS to eZee Centrix, a booking-engine interface, and POS
+    connectivity for eZee Optimus. The PMS connectivity operations are JSON
+    POST to /pmsinterface/pms_connectivity.php on host live.ipms247.com, while
+    inventory and rate reads are XML POST to /pmsinterface/getdataAPI.php.
+    There is no published self-serve API key flow, no public SDK, and no
+    verifiable public GitHub organization for eZee.
+  corporateContext: |
+    eZee Technosys is now part of Yanolja Cloud. The connectivity portal and
+    support content are branded as "Yanolja Cloud Solution" (YCS), and support
+    documentation is hosted under yanoljacloudsolution.freshdesk.com. The
+    connectivity host live.ipms247.com is the shared platform backbone.
+    Product naming (eZee Absolute, eZee Centrix, eZee Reservation, eZee
+    Optimus) persists alongside the Yanolja Cloud branding.
+  apiAvailability: partner-gated
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://live.ipms247.com/pmsinterface/
+      format: JSON
+      documented: true
+      note: PMS connectivity operations via pms_connectivity.php (RequestType-multiplexed JSON POST).
+    - protocol: REST
+      scheme: https
+      baseURL: https://live.ipms247.com/pmsinterface/
+      format: XML
+      documented: true
+      note: Inventory and rate reads via getdataAPI.php (XML POST).
+    - protocol: XML Interface
+      scheme: https
+      documented: true
+      note: Channel-manager XML interface lets a third-party PMS connect to eZee Centrix (Yanolja Cloud Solution) for two-way rate / availability / reservation sync.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket or streaming surface is documented; updates are obtained by polling.
+  authentication:
+    mechanism: HotelCode + AuthCode (property-scoped token)
+    selfServe: false
+    note: >-
+      Credentials are provisioned per property through the Connectivity Portal,
+      not self-issued. A vendor-identifying User-Agent header (e.g.
+      openAPI-{vendor/property}) is expected by the platform.
+  endpointsConfirmed:
+    - POST https://live.ipms247.com/pmsinterface/pms_connectivity.php (JSON; bookings, inventory, rates, restrictions, configuration)
+    - POST https://live.ipms247.com/pmsinterface/getdataAPI.php (XML; room inventory and rates reads)
+sources:
+  - url: https://api.ezeetechnosys.com/
+    type: Documentation
+    note: YCS Connectivity Portal landing page; lists PMS, kiosk, booking engine, meta search, and POS connectivity categories.
+  - url: https://api.ezeetechnosys.com/tag/pms-connectivity/
+    type: Documentation
+    note: PMS connectivity operation list (fetch / receive bookings, update inventory, linear / non-linear rates, restrictions, room information).
+  - url: https://www.ezeetechnosys.com
+    type: Website
+    note: Corporate site for eZee Technosys hospitality products.
+  - url: https://www.ezeecentrix.com/features/api-integration.php
+    type: Documentation
+    note: Describes the channel-manager XML interface for third-party PMS integration.
+  - url: https://yanoljacloudsolution.freshdesk.com/
+    type: SupportPortal
+    note: Yanolja Cloud Solution support / configuration documentation, reflecting eZee's place within Yanolja Cloud.
+actions:
+  apisYmlUpdated: true
+  reason: |
+    Catalogued the partner-gated connectivity surface accurately: four API
+    entries (Reservations & Bookings, Room Inventory & Rates, Guests &
+    Configuration, Centrix Channel Manager) mapped to the documented
+    live.ipms247.com endpoints. Pricing left reconciled:false (sales-led
+    subscriptions, no public per-call pricing). GitHubOrganization omitted
+    because no verifiable public org exists. OpenAPI models only the two
+    confirmed connectivity endpoints; no endpoints were fabricated.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

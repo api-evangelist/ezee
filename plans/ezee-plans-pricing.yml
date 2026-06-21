@@ -1,0 +1,82 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: eZee Technosys
+providerId: ezee
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Hospitality
+- Hotel
+- PMS
+- Channel Manager
+- Reservations
+- Plans
+description: >-
+  eZee Technosys (Yanolja Cloud Solution) sells its hospitality products -
+  eZee Absolute PMS, eZee Centrix channel manager, eZee Reservation booking
+  engine, and eZee Optimus POS - on a subscription / quote basis arranged
+  through sales, not as a published self-serve price list. The YCS
+  Connectivity Portal API is a partner integration capability rather than a
+  separately metered, priced product; access is provisioned per property to
+  the connecting PMS / channel partner. No public per-call API pricing is
+  documented, so plan entries below are not reconciled.
+notes: >-
+  Product subscription pricing is sales-led and region / property dependent.
+  API connectivity is provisioned through partner agreements with no public
+  per-request pricing. Verify commercial terms directly with eZee / Yanolja
+  Cloud Solution.
+sources:
+- https://www.ezeetechnosys.com
+- https://www.ezeeabsolute.com
+- https://api.ezeetechnosys.com/
+plans:
+- id: ezee-product-subscription
+  name: Product Subscription
+  type: subscription
+  description: >-
+    Subscription to eZee hospitality products (PMS, channel manager, booking
+    engine, POS). Pricing is quote-based via sales; not publicly listed.
+  entries:
+  - label: eZee Product Subscription
+    name: product_subscription
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: eZee Absolute (PMS)
+  - name: eZee Centrix (Channel Manager)
+  - name: eZee Reservation (Booking Engine)
+  - name: eZee Optimus (POS)
+- id: ezee-connectivity
+  name: Connectivity / API Access
+  type: enterprise
+  description: >-
+    Partner-gated access to the YCS Connectivity Portal API, provisioned per
+    property to connecting PMS / channel / distribution partners. No public
+    per-request pricing is documented.
+  entries:
+  - label: Connectivity Partner Access
+    name: connectivity_access
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales / partner agreement
+    userMultiplied: false
+  elements:
+  - name: PMS Connectivity
+  - name: Channel Manager Connectivity
+  - name: Booking Engine
+  - name: POS Connectivity
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

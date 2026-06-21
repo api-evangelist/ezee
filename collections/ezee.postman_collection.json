@@ -1,0 +1,195 @@
+{
+  "info": {
+    "name": "eZee Technosys YCS Connectivity API",
+    "description": "Partner-gated connectivity API for eZee Technosys (Yanolja Cloud Solution). Access is provisioned per property via the YCS Connectivity Portal; every request is scoped by HotelCode + AuthCode. PMS connectivity is JSON POST to pms_connectivity.php; inventory and rate reads are XML POST to getdataAPI.php.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://live.ipms247.com"
+    },
+    {
+      "key": "hotelCode",
+      "value": ""
+    },
+    {
+      "key": "authCode",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "PMS Connectivity",
+      "description": "RequestType-multiplexed JSON operations for bookings, inventory, rates, restrictions, and configuration.",
+      "item": [
+        {
+          "name": "Retrieve a Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/pms_connectivity.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "pms_connectivity.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"RequestType\": \"FetchBooking\",\n  \"Authentication\": {\n    \"HotelCode\": \"{{hotelCode}}\",\n    \"AuthCode\": \"{{authCode}}\"\n  },\n  \"BookingId\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Retrieve All Bookings (New / Modified / Cancelled)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/pms_connectivity.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "pms_connectivity.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"RequestType\": \"FetchBookings\",\n  \"Authentication\": {\n    \"HotelCode\": \"{{hotelCode}}\",\n    \"AuthCode\": \"{{authCode}}\"\n  },\n  \"FromDate\": \"\",\n  \"ToDate\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Receive a Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/pms_connectivity.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "pms_connectivity.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"RequestType\": \"BookingRecieve\",\n  \"Authentication\": {\n    \"HotelCode\": \"{{hotelCode}}\",\n    \"AuthCode\": \"{{authCode}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Room Inventory",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/pms_connectivity.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "pms_connectivity.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"RequestType\": \"UpdateRoomInventory\",\n  \"Authentication\": {\n    \"HotelCode\": \"{{hotelCode}}\",\n    \"AuthCode\": \"{{authCode}}\"\n  },\n  \"RoomTypeId\": \"\",\n  \"FromDate\": \"\",\n  \"ToDate\": \"\",\n  \"Availability\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Rate (Linear / Non-Linear)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/pms_connectivity.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "pms_connectivity.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"RequestType\": \"SetRoomRate\",\n  \"Authentication\": {\n    \"HotelCode\": \"{{hotelCode}}\",\n    \"AuthCode\": \"{{authCode}}\"\n  },\n  \"RoomTypeId\": \"\",\n  \"RateTypeId\": \"\",\n  \"FromDate\": \"\",\n  \"ToDate\": \"\",\n  \"Rate\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Stay Restriction (StopSell / COA / COD / Min / Max Nights)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/pms_connectivity.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "pms_connectivity.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"RequestType\": \"UpdateStopSell\",\n  \"Authentication\": {\n    \"HotelCode\": \"{{hotelCode}}\",\n    \"AuthCode\": \"{{authCode}}\"\n  },\n  \"RoomTypeId\": \"\",\n  \"FromDate\": \"\",\n  \"ToDate\": \"\",\n  \"Restriction\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Retrieve Room Information (Room Types / Rate Types / Rate Plans)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/pms_connectivity.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "pms_connectivity.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "json" } },
+              "raw": "{\n  \"RequestType\": \"FetchRoomInformation\",\n  \"Authentication\": {\n    \"HotelCode\": \"{{hotelCode}}\",\n    \"AuthCode\": \"{{authCode}}\"\n  }\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory and Rates (XML)",
+      "description": "XML POST reads for room inventory and room rates.",
+      "item": [
+        {
+          "name": "Retrieve Room Inventory / Rates",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/xml" },
+              { "key": "User-Agent", "value": "openAPI-{vendor}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/pmsinterface/getdataAPI.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["pmsinterface", "getdataAPI.php"]
+            },
+            "body": {
+              "mode": "raw",
+              "options": { "raw": { "language": "xml" } },
+              "raw": "<RES_Request>\n  <Authentication HotelCode=\"{{hotelCode}}\" AuthCode=\"{{authCode}}\" />\n  <FromDate></FromDate>\n  <ToDate></ToDate>\n  <RoomTypeId></RoomTypeId>\n  <RateTypeId></RateTypeId>\n</RES_Request>"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

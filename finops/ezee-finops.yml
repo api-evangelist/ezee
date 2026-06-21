@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: eZee Technosys
+providerId: ezee
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Hospitality
+- Hotel
+- PMS
+- Channel Manager
+- Reservations
+- FinOps
+- Cost Management
+description: >-
+  FinOps view of eZee Technosys (Yanolja Cloud Solution) spend. eZee bills via
+  sales-led product subscriptions (eZee Absolute PMS, eZee Centrix channel
+  manager, eZee Reservation booking engine, eZee Optimus POS) rather than
+  metered, per-request API charges. The YCS Connectivity Portal API is a
+  partner integration capability bundled with product / partner agreements and
+  is not separately metered with public pricing. Cost dimensions below are
+  therefore framed around subscription and property scope, and meter values are
+  not reconciled against a public price list.
+notes: >-
+  Subscription pricing is sales-led and not publicly listed; API connectivity
+  is provisioned through partner agreements without public per-request pricing.
+  Verify commercial terms and any usage-based components directly with eZee /
+  Yanolja Cloud Solution.
+sources:
+- https://www.ezeetechnosys.com
+- https://www.ezeeabsolute.com
+- https://api.ezeetechnosys.com/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: eZee Technosys (Yanolja Cloud Solution)
+serviceCategory: Hospitality Software
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: eZee YCS Connectivity Portal
+  ServiceCategory: Hospitality Software
+  ProviderName: eZee Technosys
+  PublisherName: Yanolja Cloud Solution
+  InvoiceIssuerName: eZee Technosys / Yanolja Cloud Solution
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: product_subscription
+  description: Monthly / annual subscription to eZee hospitality products, priced via sales.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - property
+  - product
+- name: property_count
+  description: Number of properties (HotelCodes) provisioned, a primary subscription scaling dimension.
+  unit: properties
+  aggregation: sum
+  dimensions:
+  - account
+- name: connectivity_access
+  description: Partner connectivity provisioning per property; bundled with agreements, not separately metered publicly.
+  unit: properties
+  aggregation: sum
+  dimensions:
+  - account
+  - property
+principles:
+- name: Visibility
+  description: Track active product subscriptions and provisioned properties (HotelCodes) against invoices.
+- name: Allocation
+  description: Map subscription cost to properties / business units by HotelCode.
+- name: Optimization
+  description: Right-size product modules per property and consolidate connectivity through a single partner integration.
+- name: Accountability
+  description: Assign owners per property and review subscription spend against the negotiated agreement.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

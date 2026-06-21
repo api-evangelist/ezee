@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "eZee Technosys YCS Connectivity API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "note": "Property-scoped HotelCode + AuthCode provisioned via the YCS Connectivity Portal; not a self-serve key."
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PMS Connectivity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a Booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{\"RequestType\":\"FetchBooking\",\"Authentication\":{\"HotelCode\":\"\",\"AuthCode\":\"\"},\"BookingId\":\"\"}"
+            }
+          },
+          "docs": "Fetch booking details for a specific booking ID, scoped by HotelCode and AuthCode."
+        },
+        {
+          "info": {
+            "name": "Retrieve All Bookings (New / Modified / Cancelled)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{\"RequestType\":\"FetchBookings\",\"Authentication\":{\"HotelCode\":\"\",\"AuthCode\":\"\"},\"FromDate\":\"\",\"ToDate\":\"\"}"
+            }
+          },
+          "docs": "Get the latest newly created, modified, and cancelled bookings for a property."
+        },
+        {
+          "info": {
+            "name": "Receive a Booking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{\"RequestType\":\"BookingRecieve\",\"Authentication\":{\"HotelCode\":\"\",\"AuthCode\":\"\"}}"
+            }
+          },
+          "docs": "Acknowledge receipt of new, modified, or cancelled bookings."
+        },
+        {
+          "info": {
+            "name": "Update Room Inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{\"RequestType\":\"UpdateRoomInventory\",\"Authentication\":{\"HotelCode\":\"\",\"AuthCode\":\"\"},\"RoomTypeId\":\"\",\"FromDate\":\"\",\"ToDate\":\"\",\"Availability\":\"\"}"
+            }
+          },
+          "docs": "Update room availability for a date range and room type."
+        },
+        {
+          "info": {
+            "name": "Update Rate (Linear / Non-Linear)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{\"RequestType\":\"SetRoomRate\",\"Authentication\":{\"HotelCode\":\"\",\"AuthCode\":\"\"},\"RoomTypeId\":\"\",\"RateTypeId\":\"\",\"FromDate\":\"\",\"ToDate\":\"\",\"Rate\":\"\"}"
+            }
+          },
+          "docs": "Set linear or occupancy-based (non-linear) room rates for a date range, room type, and rate type."
+        },
+        {
+          "info": {
+            "name": "Update Stay Restriction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{\"RequestType\":\"UpdateStopSell\",\"Authentication\":{\"HotelCode\":\"\",\"AuthCode\":\"\"},\"RoomTypeId\":\"\",\"FromDate\":\"\",\"ToDate\":\"\",\"Restriction\":\"\"}"
+            }
+          },
+          "docs": "Apply StopSell, Close-on-Arrival, Close-on-Departure, Min Nights, or Max Nights restrictions for a date range."
+        },
+        {
+          "info": {
+            "name": "Retrieve Room Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{\"RequestType\":\"FetchRoomInformation\",\"Authentication\":{\"HotelCode\":\"\",\"AuthCode\":\"\"}}"
+            }
+          },
+          "docs": "Get room types, rate types, and rate plans configured for a property."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory and Rates (XML)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Room Inventory / Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/getdataAPI.php",
+            "body": {
+              "type": "xml",
+              "data": "<RES_Request><Authentication HotelCode=\"\" AuthCode=\"\" /><FromDate></FromDate><ToDate></ToDate><RoomTypeId></RoomTypeId><RateTypeId></RateTypeId></RES_Request>"
+            }
+          },
+          "docs": "Read room inventory and room rates for a date range, room type, and rate type. Returns XML."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
