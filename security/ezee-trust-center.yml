@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.yanoljacloudsolution.com/
+url: https://www.yanoljacloudsolution.com/
+certifications:
+- PCI DSS
+- GDPR
+evidence:
+- source: https://www.yanoljacloudsolution.com/
+  keywords:
+  - pci dss
+  - gdpr

@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/ezee-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: HotelCodeAuthCode
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Property-scoped credentials (HotelCode + AuthCode) provisioned through the YCS
+    Connectivity Portal, supplied per the portal's authentication conventions (commonly carried
+    in the request body and/or as HTTP Basic with a vendor-identifying User-Agent header). Not
+    a self-serve public API key.
+  sources:
+  - openapi/ezee-openapi.yml

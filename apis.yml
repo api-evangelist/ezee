@@ -94,6 +94,12 @@ apis:
     availability, and reservations across connected OTAs and distribution
     channels. Provisioned per property through the Connectivity Portal.
 common:
+- type: TrustCenter
+  url: security/ezee-trust-center.yml
+- type: DomainSecurity
+  url: security/ezee-domain-security.yml
+- type: Authentication
+  url: authentication/ezee-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/ezee-technosys-pvt-ltd-/
 - type: Website
