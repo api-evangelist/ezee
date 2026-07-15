@@ -94,6 +94,8 @@ apis:
     availability, and reservations across connected OTAs and distribution
     channels. Provisioned per property through the Connectivity Portal.
 common:
+- type: AgenticAccess
+  url: agentic-access/ezee-agentic-access.yml
 - type: TrustCenter
   url: security/ezee-trust-center.yml
 - type: DomainSecurity
