@@ -1,0 +1,16 @@
+{
+  "provider": "ezee",
+  "sources": [
+    "ezee-inventory-and-rates-api-openapi.yml",
+    "ezee-pms-connectivity-api-openapi.yml"
+  ],
+  "outputs": [
+    "ezee-inventory-and-rates-api-openapi.yml",
+    "ezee-pms-connectivity-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
