@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "eZee Technosys YCS Connectivity Inventory and Rates PMS Connectivity API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PMS Connectivity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "PMS connectivity operations (bookings, inventory, rates, restrictions, configuration)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://live.ipms247.com/pmsinterface/pms_connectivity.php",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Single JSON POST endpoint that multiplexes PMS connectivity operations via a RequestType field. Documented operations include: retrieving a booking, retrieving all bookings (new / modified / cancelled updates), retrieving transaction details, receiving a booking, updating room inventory, updating linear and non-linear rates, updating stay restrictions (StopSell, Close-on-Arrival, Close-on-Departure, Min Nights, Max Nights), retrieving room rates with source details, and retrieving room informati"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,150 @@
+{
+  "item": [
+    {
+      "id": "811d2943-86f3-404f-9026-65e75b710de2",
+      "name": "PMS Connectivity",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "feba4204-999a-4df0-8960-5c222868a598",
+          "name": "PMS connectivity operations (bookings, inventory, rates, restrictions, configuration)",
+          "request": {
+            "name": "PMS connectivity operations (bookings, inventory, rates, restrictions, configuration)",
+            "description": {
+              "content": "Single JSON POST endpoint that multiplexes PMS connectivity operations via a RequestType field. Documented operations include: retrieving a booking, retrieving all bookings (new / modified / cancelled updates), retrieving transaction details, receiving a booking, updating room inventory, updating linear and non-linear rates, updating stay restrictions (StopSell, Close-on-Arrival, Close-on-Departure, Min Nights, Max Nights), retrieving room rates with source details, and retrieving room information (room types, rate types, rate plans). All requests are scoped by HotelCode and AuthCode.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pmsinterface",
+                "pms_connectivity.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RequestType\": \"<string>\",\n  \"Authentication\": {\n    \"HotelCode\": \"<string>\",\n    \"AuthCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe64c703-4d8b-4506-9360-7defa42d2b42",
+              "name": "JSON response payload whose shape depends on RequestType.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pmsinterface",
+                    "pms_connectivity.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RequestType\": \"<string>\",\n  \"Authentication\": {\n    \"HotelCode\": \"<string>\",\n    \"AuthCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://live.ipms247.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9e711bdf-75c7-457b-a3ac-1e6794a581f5",
+    "name": "eZee Technosys YCS Connectivity Inventory and Rates PMS Connectivity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner-facing connectivity API for the eZee Technosys (Yanolja Cloud Solution) hospitality platform - eZee Absolute PMS, eZee Centrix channel manager, eZee Reservation booking engine, and eZee Optimus POS. The API is not a self-serve public API; access is provisioned per property through the YCS Connectivity Portal (https://api.ezeetechnosys.com/). Every request is scoped to a property via a HotelCode plus an AuthCode (authentication token), supplied together with a vendor-identifying User-Agent header. The PMS connectivity surface accepts JSON POST requests to pms_connectivity.php, while inventory and rate reads use XML POST to getdataAPI.php. Endpoint paths and field names below are modeled from the public Connectivity Portal documentation and are subject to per-property provisioning; verify exact request and response payloads against the portal before integrating.\n\nContact Support:\n Name: eZee Technosys / Yanolja Cloud Solution",
+      "type": "text/plain"
+    }
+  }
+}

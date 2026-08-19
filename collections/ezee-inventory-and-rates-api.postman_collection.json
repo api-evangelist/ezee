@@ -1,0 +1,150 @@
+{
+  "item": [
+    {
+      "id": "7d7d516d-4823-4f27-84ea-0a0e4917f61a",
+      "name": "Inventory and Rates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c75cf0f-7a03-4ac8-9710-871619ab7e80",
+          "name": "Retrieve room inventory and room rates (XML)",
+          "request": {
+            "name": "Retrieve room inventory and room rates (XML)",
+            "description": {
+              "content": "XML POST endpoint used to read room inventory and room rates for a date range, room type, and rate type. Scoped by HotelCode and AuthCode. Responds with XML.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pmsinterface",
+                "getdataAPI.php"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e7e82f5a-fb7f-482e-9a3e-c2628eabc173",
+              "name": "XML document containing the requested inventory or rate data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pmsinterface",
+                    "getdataAPI.php"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://live.ipms247.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e2efd0d1-8d3e-482a-950b-eb18986ba57c",
+    "name": "eZee Technosys YCS Connectivity Inventory and Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner-facing connectivity API for the eZee Technosys (Yanolja Cloud Solution) hospitality platform - eZee Absolute PMS, eZee Centrix channel manager, eZee Reservation booking engine, and eZee Optimus POS. The API is not a self-serve public API; access is provisioned per property through the YCS Connectivity Portal (https://api.ezeetechnosys.com/). Every request is scoped to a property via a HotelCode plus an AuthCode (authentication token), supplied together with a vendor-identifying User-Agent header. The PMS connectivity surface accepts JSON POST requests to pms_connectivity.php, while inventory and rate reads use XML POST to getdataAPI.php. Endpoint paths and field names below are modeled from the public Connectivity Portal documentation and are subject to per-property provisioning; verify exact request and response payloads against the portal before integrating.\n\nContact Support:\n Name: eZee Technosys / Yanolja Cloud Solution",
+      "type": "text/plain"
+    }
+  }
+}
