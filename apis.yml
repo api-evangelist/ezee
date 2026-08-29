@@ -9,6 +9,18 @@ description: eZee Technosys is a hospitality technology company offering eZee Ab
   and POS integrations so third-party systems can sync reservations, room
   inventory, rates, restrictions, and guest data. eZee is now part of Yanolja
   Cloud (Yanolja Cloud Solution).
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
