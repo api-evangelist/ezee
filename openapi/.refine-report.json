@@ -1,8 +1,7 @@
 {
   "provider": "ezee",
   "sources": [
-    "ezee-inventory-and-rates-api-openapi.yml",
-    "ezee-pms-connectivity-api-openapi.yml"
+    "_original/ezee-openapi.yml"
   ],
   "outputs": [
     "ezee-inventory-and-rates-api-openapi.yml",
@@ -11,6 +10,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ezee-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "ezee-openapi.yml: declared missing tag: Inventory and Rates",
+    "ezee-openapi.yml: declared missing tag: PMS Connectivity",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ezee-inventory-and-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ezee-pms-connectivity-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
