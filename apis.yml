@@ -50,7 +50,7 @@ tags_raw:
 - Channel Manager
 - Reservations
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: ezee:ezee-inventory-and-rates-api
@@ -83,6 +83,8 @@ apis:
   - type: Documentation
     url: https://api.ezeetechnosys.com/
 common:
+- url: https://yanoljacloudsolution.com:443/blog
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/ezee-agentic-access.yml
 - type: TrustCenter
